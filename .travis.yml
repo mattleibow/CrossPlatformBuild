@@ -16,10 +16,13 @@ env:
     - secure: gmtGHmK0Ki4E/aruq0rBEloznEejPowBXPIDmRNCBAb0B2nOTcp8/KGLIJR2Qy8jUxqmfh2Yci8lq8TWaVGadmkmnjPYAa/aQfGlv5YHRiOPPsdhyfA1DfMIAricRzv8o5yk2lGBbM9n8slI1tBN8JmMrrngSUrnqRALv0SwPlyV4fY3ogscr6THssrIyjZ50FeCu9dUow/LZLW+wqKG4fEw6qsEdunWsl+YeUNl7y/p3X6CEzl7XZPXa+FYgW2JVnKkxti5D+YT69sGhqEa/oIpS6NppYhzK3SFxOHoq9fISQKcjxGwsGJxZoykTzV5jDR+lYDoxaXYrrpkaYYj+SynGypJryJkHWJGpeMCsCJsFpzEsMTVJ9UWvGkb9ne6RzwTWcgoO7tvfguMj0GCOIlQu/eshe4E/lsSqvC0eewdhBpXCnbuiqSkVZoc95k4q8LAkclViI84xETBn6UGOMhgZqlakYcQCoqlsuSc1mJO5HD0ZCpP9nyQ061vDCKODVmvlb4Rcpez9b/xjMLATds/jvhjbo68Lb+EPb2cTG2uldDcOQBY2m1djjsETf5hPyUmS+dKzCJCsL2vOCMSNzoFIML/tixh+TQfpNDOCs79UzgJoVjiMfEEpondpdUQvc18Vi+Rk2BcWPlC511EWh2h7Y9N7HnMPjLRgShA9TQ=
 
 install: 
+  - chmod +x ./build-scripts/travis-before-build.sh
   - ./build-scripts/travis-before-build.sh
 
 script: 
+  - chmod +x ./build.sh
   - ./build.sh --target Default-Mac --configuration ${Configuration} 
 
 after_script:
+  - chmod +x ./build-scripts/travis-after-build.sh
   - ./build-scripts/travis-after-build.sh
