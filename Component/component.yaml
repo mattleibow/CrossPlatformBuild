@@ -1,0 +1,61 @@
+%YAML 1.2
+---
+id: CrossPlatformBuildTop
+version: "1.0.0"
+name: "Cross-Platform Build"
+summary: "A template repository for building cross-platform Xamarin apps on free, hosted CI."
+publisher: "Matthew Leibowitz"
+publisher-url: "http://xamarin.com"
+src-url: "https://github.com/mattleibow/CrossPlatformBuild"
+
+details: Details.md
+license: License.md
+getting-started: GettingStarted.md
+
+is_shell: true
+no_build: true
+libraries:
+  android:
+    - ../output/pcl/CrossPlatformBuild.Core.dll
+    - ../output/android/CrossPlatformBuild.Android.dll
+  ios-unified:
+    - ../output/pcl/CrossPlatformBuild.Core.dll
+    - ../output/ios/CrossPlatformBuild.iOS.dll
+  wpa81:
+    - ../output/pcl/CrossPlatformBuild.Core.dll
+    - ../output/wpa81/CrossPlatformBuild.WindowsPhone.dll
+packages:
+  wpa81: CrossPlatformBuild, Version=1.0.0
+  android: CrossPlatformBuild, Version=1.0.0
+  ios-unified: CrossPlatformBuild, Version=1.0.0
+local-nuget-repo: ../output/  
+
+screenshots: 
+  - ../Resources/Screenshots/screenshot.png
+icons: 
+  - ../Resources/Icons/icon_128x128.png
+  - ../Resources/Icons/icon_512x512.png
+
+samples: 
+  - name: Windows Phone Sample
+    path: ../CrossPlatformBuild.Samples/WindowsPhoneSample.sln
+    installNuGets:
+      - project: WindowsPhoneSample
+        packages:
+          - CrossPlatformBuild
+    # work around until the new vesion of xamarin-component undestands wpa81
+    removeProjects:
+      - CrossPlatformBuild.Core
+      - CrossPlatformBuild.WindowsPhone
+  - name: Android Sample
+    path: ../CrossPlatformBuild.Samples/AndroidSample.sln
+    installNuGets:
+      - project: AndroidSample
+        packages:
+          - CrossPlatformBuild
+  - name: iOS Sample
+    path: ../CrossPlatformBuild.Samples/iOSSample.sln
+    installNuGets:
+      - project: iOSSample
+        packages:
+          - CrossPlatformBuild
