@@ -275,8 +275,6 @@ Task("DownloadArtifacts")
 Task("UploadArtifacts")
     .WithCriteria(!string.IsNullOrEmpty(sha))
     .WithCriteria(!ForEverywhere)
-    .IsDependentOn("Build")
-    .IsDependentOn("Package")
     .Does(() =>
 {
     Information("Connecting to GitHub...");
