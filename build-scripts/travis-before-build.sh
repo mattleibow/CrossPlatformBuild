@@ -53,4 +53,4 @@ sudo installer -pkg "downloads/monotouch-${MonoTouchVersion}.pkg" -target /
 echo Activate the Xamarin license
 wget -nc -O "downloads/XamarinActivator-${ActivatorVersion}.nupkg" "https://www.nuget.org/api/v2/package/XamarinActivator/${ActivatorVersion}"
 unzip -o -d downloads/XamarinActivator "downloads/XamarinActivator-${ActivatorVersion}.nupkg"
-mono downloads/XamarinActivator/tools/XamarinActivator.exe activate -x ios -e "${XamarinEmail}" -p "${XamarinPassword}" -k "${XamarinApiKey}" -u "TravisCI" 
+mono downloads/XamarinActivator/tools/XamarinActivator.exe activate -x ios -e "${XamarinEmail}" -p "${XamarinPassword}" 

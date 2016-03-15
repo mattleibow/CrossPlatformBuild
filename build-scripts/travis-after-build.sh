@@ -16,4 +16,4 @@ rm -f ~/Library/MobileDevice/Provisioning\ Profiles/iOSDeveloper.mobileprovision
 # Deactivate the Xamarin license
 # 
 echo Deactivate the Xamarin license
-mono downloads/XamarinActivator/tools/XamarinActivator.exe deactivate -x ios -e "${XamarinEmail}" -p "${XamarinPassword}" -k "${XamarinApiKey}" -u "TravisCI"
+mono downloads/XamarinActivator/tools/XamarinActivator.exe deactivate -x ios -e "${XamarinEmail}" -p "${XamarinPassword}"
