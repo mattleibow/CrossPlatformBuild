@@ -38,7 +38,7 @@ icons:
 
 samples: 
   - name: Windows Phone Sample
-    path: ../CrossPlatformBuild.Samples/WindowsPhoneSample.sln
+    path: ../Samples/WindowsPhoneSample.sln
     installNuGets:
       - project: WindowsPhoneSample
         packages:
@@ -48,13 +48,13 @@ samples:
       - CrossPlatformBuild.Core
       - CrossPlatformBuild.WindowsPhone
   - name: Android Sample
-    path: ../CrossPlatformBuild.Samples/AndroidSample.sln
+    path: ../Samples/AndroidSample.sln
     installNuGets:
       - project: AndroidSample
         packages:
           - CrossPlatformBuild
   - name: iOS Sample
-    path: ../CrossPlatformBuild.Samples/iOSSample.sln
+    path: ../Samples/iOSSample.sln
     installNuGets:
       - project: iOSSample
         packages:

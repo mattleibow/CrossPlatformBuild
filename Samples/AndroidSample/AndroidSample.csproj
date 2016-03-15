@@ -73,11 +73,11 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CrossPlatformBuild\CrossPlatformBuild.Android\CrossPlatformBuild.Android.csproj">
+    <ProjectReference Include="..\..\Source\CrossPlatformBuild.Android\CrossPlatformBuild.Android.csproj">
       <Project>{af04c52c-e81a-4035-8820-cf16d719751c}</Project>
       <Name>CrossPlatformBuild.Android</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CrossPlatformBuild\CrossPlatformBuild.Core\CrossPlatformBuild.Core.csproj">
+    <ProjectReference Include="..\..\Source\CrossPlatformBuild.Core\CrossPlatformBuild.Core.csproj">
       <Project>{545fc47f-73bb-46a7-9b99-fad3fd6efdfb}</Project>
       <Name>CrossPlatformBuild.Core</Name>
     </ProjectReference>

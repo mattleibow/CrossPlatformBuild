@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformBuild.Core", "..\CrossPlatformBuild\CrossPlatformBuild.Core\CrossPlatformBuild.Core.csproj", "{545FC47F-73BB-46A7-9B99-FAD3FD6EFDFB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformBuild.Core", "..\Source\CrossPlatformBuild.Core\CrossPlatformBuild.Core.csproj", "{545FC47F-73BB-46A7-9B99-FAD3FD6EFDFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformBuild.iOS", "..\CrossPlatformBuild\CrossPlatformBuild.iOS\CrossPlatformBuild.iOS.csproj", "{FC7A209F-3361-41CA-A08A-24775F71C02A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformBuild.iOS", "..\Source\CrossPlatformBuild.iOS\CrossPlatformBuild.iOS.csproj", "{FC7A209F-3361-41CA-A08A-24775F71C02A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iOSSample", "iOSSample\iOSSample.csproj", "{42498E6C-2FAB-44E0-875B-75884E930040}"
 EndProject
