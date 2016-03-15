@@ -181,6 +181,7 @@ Task("BuildSamples")
 
 Task("PackageNuGet")
     .IsDependentOn("Build")
+    .WithCriteria(ForWindows)
     .Does(() =>
 {
     NuGetPack("./NuGet/CrossPlatformBuild.nuspec", new NuGetPackSettings {
@@ -194,6 +195,7 @@ Task("PackageComponent")
     .IsDependentOn("Build")
     .IsDependentOn("PackageNuGet")
     .IsDependentOn("BuildSamples")
+    .WithCriteria(ForWindows)
     .Does(() =>
 {
     DeleteFiles("./Component/*.xam");
@@ -205,7 +207,6 @@ Task("PackageComponent")
 });
 
 Task("Package")
-    .WithCriteria(ForWindows)
     .IsDependentOn("DownloadArtifacts")
     .IsDependentOn("PackageNuGet")
     .IsDependentOn("PackageComponent")
