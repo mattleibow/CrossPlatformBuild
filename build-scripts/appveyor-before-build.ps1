@@ -3,7 +3,7 @@ $ErrorActionPreference = "Stop"
 #
 # Link the Android SDK directory to one without spaces
 #
-New-Item -ItemType SymbolicLink -Path "$env:ANDROID_HOME" -Value "C:\Program Files (x86)\Android\android-sdk"
+cmd /c mklink /j $env:ANDROID_HOME "C:\Program Files (x86)\Android\android-sdk"
 
 #
 # Install the tools, such as proguard
