@@ -5,7 +5,7 @@
 #
 export MonoVersion=4.3.2
 export MonoTouchVersion=9.4.2.27
-export ActivatorVersion=1.0.0
+export ActivatorVersion=1.0.1
 
 #
 # Encrypting the certificates and profiles
