@@ -154,7 +154,7 @@ Task("Build")
     // copy the outputs
     foreach (var output in outputs) {
         FilePath source = string.Format(output.Key, configuration);
-        FilePath dest = outDir.Combine(output.Value).CombineWithFilePath(source);
+        FilePath dest = outDir.Combine(output.Value).CombineWithFilePath(source.GetFilename());
         DirectoryPath dir = dest.GetDirectory();
         if (!DirectoryExists(dir)) {
             CreateDirectory(dir);
