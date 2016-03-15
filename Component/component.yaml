@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-id: CrossPlatformBuildTop
+id: CrossPlatformBuild
 version: "1.0.0"
 name: "Cross-Platform Build"
 summary: "A template repository for building cross-platform Xamarin apps on free, hosted CI."
