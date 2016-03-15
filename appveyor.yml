@@ -21,7 +21,7 @@ xamarin:
   ios: true
 
 install:
- - ps: .\build-scripts\appveyor-before-build.ps1
+ - cmd: .\build-scripts\appveyor-before-build.cmd
   
 build_script:
  - ps: .\build.ps1 -Target Default-Windows -Configuration $Env:Configuration
