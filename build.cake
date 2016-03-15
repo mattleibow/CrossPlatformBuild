@@ -93,13 +93,13 @@ Task("Clean")
     var dirs = new [] { 
         "./output",
         // source
-        "./CrossPlatformBuild/packages",
-        "./CrossPlatformBuild/*/bin", 
-        "./CrossPlatformBuild/*/obj", 
+        "./Source/packages",
+        "./Source/*/bin", 
+        "./Source/*/obj", 
         // samples
-        "./CrossPlatformBuild.Samples/packages",
-        "./CrossPlatformBuild.Samples/*/bin",
-        "./CrossPlatformBuild.Samples/*/obj",
+        "./Samples/packages",
+        "./Samples/*/bin",
+        "./Samples/*/obj",
     };
     foreach (var dir in dirs) {
         CleanDirectories(dir);
@@ -111,8 +111,8 @@ Task("RestorePackages")
 {
     // restoring NuGets can be done on any platform
     var solutions = new [] { 
-        "./CrossPlatformBuild/CrossPlatformBuild.sln", 
-        "./CrossPlatformBuild.Samples/CrossPlatformBuild.Samples.sln",
+        "./Source/CrossPlatformBuild.sln", 
+        "./Samples/CrossPlatformBuild.Samples.sln",
     };
     foreach (var solution in solutions) {
         Information("Restoring {0}...", solution);
@@ -127,16 +127,13 @@ Task("Build")
     .IsDependentOn("RestorePackages")
     .Does(() =>
 {
-    DirectoryPath sourceRoot = "./CrossPlatformBuild";
-    
     // get the platform-specific solution name
-    FilePath solution = "CrossPlatformBuild.sln";
+    FilePath solution = "./Source/CrossPlatformBuild.sln";
     if (ForWindowsOnly) {
-        solution = "CrossPlatformBuild.Windows.sln";
+        solution = "./Source/CrossPlatformBuild.Windows.sln";
     } else if (ForMacOnly) {
-        solution = "CrossPlatformBuild.Mac.sln";
+        solution = "./Source/CrossPlatformBuild.Mac.sln";
     }
-    solution = sourceRoot.CombineWithFilePath(solution);
     
     // build the solution
     Information("Building {0}...", solution);
@@ -144,21 +141,21 @@ Task("Build")
     
     // get the outputs, making suer to only include the ones that built
     var outputs = new Dictionary<string, string> {
-        { "CrossPlatformBuild.Core/bin/{0}/CrossPlatformBuild.Core.dll", "pcl" },
+        { "./Source/CrossPlatformBuild.Core/bin/{0}/CrossPlatformBuild.Core.dll", "pcl" },
     };
     if (ForWindows) {
-        outputs.Add("CrossPlatformBuild.Android/bin/{0}/CrossPlatformBuild.Android.dll", "android");
-        outputs.Add("CrossPlatformBuild.WindowsPhone/bin/{0}/CrossPlatformBuild.WindowsPhone.dll", "wpa81");
+        outputs.Add("./Source/CrossPlatformBuild.Android/bin/{0}/CrossPlatformBuild.Android.dll", "android");
+        outputs.Add("./Source/CrossPlatformBuild.WindowsPhone/bin/{0}/CrossPlatformBuild.WindowsPhone.dll", "wpa81");
     }
     if (ForMac) {
-        outputs.Add("CrossPlatformBuild.iOS/bin/{0}/CrossPlatformBuild.iOS.dll", "ios");
+        outputs.Add("./Source/CrossPlatformBuild.iOS/bin/{0}/CrossPlatformBuild.iOS.dll", "ios");
     }
     
     // copy the outputs
     foreach (var output in outputs) {
-        var source = sourceRoot.CombineWithFilePath(string.Format(output.Key, configuration));
-        var dest = outDir.Combine(output.Value).CombineWithFilePath(source.GetFilename());
-        var dir = dest.GetDirectory();
+        FilePath source = string.Format(output.Key, configuration);
+        FilePath dest = outDir.Combine(output.Value).CombineWithFilePath(source.GetFilename());
+        DirectoryPath dir = dest.GetDirectory();
         if (!DirectoryExists(dir)) {
             CreateDirectory(dir);
         }
@@ -171,11 +168,11 @@ Task("BuildSamples")
     .Does(() =>
 {
     if (ForWindows) {
-        Build("./CrossPlatformBuild.Samples/WindowsPhoneSample.sln");
-        Build("./CrossPlatformBuild.Samples/AndroidSample.sln");
+        Build("./Samples/WindowsPhoneSample.sln");
+        Build("./Samples/AndroidSample.sln");
     }
     if (ForMac) {
-        Build("./CrossPlatformBuild.Samples/iOSSample.sln");
+        Build("./Samples/iOSSample.sln");
     }
 });
 
