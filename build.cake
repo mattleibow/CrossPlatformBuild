@@ -82,6 +82,40 @@ var Build = new Action<FilePath>((solution) =>
     }
 });
 
+void MergeDirectory(DirectoryPath source, DirectoryPath dest, bool replace)
+{
+    var sourceDirName = source.FullPath;
+    var destDirName = dest.FullPath;
+    
+    if (!DirectoryExists(source)) {
+        throw new DirectoryNotFoundException("Source directory does not exist or could not be found: " + source);
+    }
+
+    if (!DirectoryExists(dest)) {
+        CreateDirectory(dest);
+    }
+
+    DirectoryInfo dir = new DirectoryInfo(sourceDirName);
+    
+    FileInfo[] files = dir.GetFiles();
+    foreach (FileInfo file in files) {
+        string temppath = dest.CombineWithFilePath(file.Name).FullPath;
+        if (FileExists(temppath)) {
+            if (replace) {
+                DeleteFile(temppath);
+            }
+        } else {
+            file.CopyTo(temppath);
+        }
+    }
+
+    DirectoryInfo[] dirs = dir.GetDirectories();
+    foreach (DirectoryInfo subdir in dirs) {
+        string temppath = dest.Combine(subdir.Name).FullPath;
+        MergeDirectory(subdir.FullName, temppath, replace);
+    }
+}
+
 //////////////////////////////////////////////////////////////////////
 // TASKS
 //////////////////////////////////////////////////////////////////////
@@ -116,6 +150,9 @@ Task("RestorePackages")
     };
     foreach (var solution in solutions) {
         Information("Restoring {0}...", solution);
+        RestoreComponents(solution, new XamarinComponentRestoreSettings {
+            ToolPath = XamarinComponentPath
+        });
         NuGetRestore(solution, new NuGetRestoreSettings {
             Source = NuGetSource,
             Verbosity = NuGetVerbosity.Detailed
@@ -265,8 +302,14 @@ Task("DownloadArtifacts")
         wc.DownloadFile(url, outputZip.FullPath);
         
         Information("Extracting output...");
-        CleanDirectory(outDir);
-        Unzip(outputZip, outDir);
+        DirectoryPath tmp = "./temp-output/";
+        if (DirectoryExists(tmp)) {
+            CleanDirectory(tmp);
+        } else {
+            CreateDirectory(tmp);
+        }
+        Unzip(outputZip, tmp);
+        MergeDirectory(tmp, outDir, false);
     }
 });
 
@@ -323,8 +366,8 @@ Task("UploadArtifacts")
 //////////////////////////////////////////////////////////////////////
 
 Task("Default")
-    .IsDependentOn("DownloadArtifacts")
     .IsDependentOn("Build")
+    .IsDependentOn("DownloadArtifacts")
     .IsDependentOn("Package")
     .IsDependentOn("UploadArtifacts");
 
