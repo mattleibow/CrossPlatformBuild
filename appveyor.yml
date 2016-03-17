@@ -10,6 +10,10 @@ environment:
     secure: ++Q00Aa+yzbi4oEn+fOuO2D2pb4NrFtQ12Hiq69arY1OgOIIUbth7nlImS9/wQRd
   AppVeyorToken:
     secure: 5mY0TVM+8MUtvl18rZ+eCuXoLMWgxJCpVRTUvry+mG4=
+  XamarinEmail: 
+    secure: +SUXZSPLHwp39+Yh09d2xxVGsEgHtlSD4NT1Og5h3sg=
+  XamarinPassword:
+    secure: Tvdf5rZl6IOCwZbvyj9B2w==
   NoWarn: ;1591;
   ContinueOnDisconnected: False
    
